@@ -15,8 +15,15 @@ class CountryCell: UITableViewCell   {
     @IBOutlet weak var capitalLabel: UILabel!
     @IBOutlet weak var population: UILabel!
     
-    func configureCell()    {
-        
+    func configureCell(with urlString: String)    {
+        flagImage.setImage(with: urlString) { result in
+            switch result   {
+            case .failure:
+                self.flagImage.image = UIImage(systemName: "country.fill")
+            case .success(let image):
+                self.flagImage.image = image
+            }
+        }
     }
     
 }

@@ -12,6 +12,12 @@ class CountriesViewController: UIViewController {
 
     @IBOutlet weak var countriesTableView: UITableView!
     
+    var countries = [Country]() {
+        didSet  {
+            countriesTableView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         countriesTableView.dataSource = self
@@ -19,11 +25,18 @@ class CountriesViewController: UIViewController {
 }
 
 extension CountriesViewController: UITableViewDataSource    {
-    func tableView(_tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return countries.count
     }
     
-    func tableView(_tableView: UITableView, cellForRowAt indexPath: IndexPath)  {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)  {
+        guard let countryCell = countriesTableView.dequeueReusableCell(withIdentifier: "countryCell", for: indexPath) as? CountryCell
+            else    {
+                fatalError()
+        }
+        
+        let country = countries[indexPath.row]
+        countryCell.configureCell(with: "https://restcountries.eu/rest/v2/name/united")
         
     }
 }
