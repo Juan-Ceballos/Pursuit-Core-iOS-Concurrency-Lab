@@ -14,13 +14,27 @@ class CountriesViewController: UIViewController {
     
     var countries = [Country]() {
         didSet  {
-            countriesTableView.reloadData()
+            DispatchQueue.main.async{
+                self.countriesTableView.reloadData()}
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         countriesTableView.dataSource = self
+        loadCountries()
+        countriesTableView.delegate = self
+    }
+    
+    func loadCountries()    {
+        CountryAPI.getCountries { [weak self] (result) in
+            switch result   {
+            case .failure(let appError):
+                print("appError: \(appError)")
+            case .success(let data):
+                self?.countries = data
+            }
+        }
     }
 }
 
@@ -29,14 +43,31 @@ extension CountriesViewController: UITableViewDataSource    {
         return countries.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)  {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
         guard let countryCell = countriesTableView.dequeueReusableCell(withIdentifier: "countryCell", for: indexPath) as? CountryCell
             else    {
                 fatalError()
         }
         
         let country = countries[indexPath.row]
-        countryCell.configureCell(with: "https://restcountries.eu/rest/v2/name/united")
+        countryCell.configureCell(with: country.flagURL, country: country)
+        return countryCell
+        }
+        
+    }
+
+extension CountriesViewController: UITableViewDelegate  {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
+    }
+}
+
+extension CountriesViewController: UISearchBarDelegate  {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
     }
 }

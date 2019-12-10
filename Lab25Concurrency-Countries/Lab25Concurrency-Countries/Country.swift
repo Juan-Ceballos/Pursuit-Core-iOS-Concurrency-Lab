@@ -12,5 +12,8 @@ struct Country: Decodable   {
     let name: String
     let alpha2Code: String
     let capital: String
-    let population: Double
+    let population: Int
+    var flagURL: String {
+        return "https://www.countryflags.io/\(alpha2Code)/flat/64.png"
+    }
 }

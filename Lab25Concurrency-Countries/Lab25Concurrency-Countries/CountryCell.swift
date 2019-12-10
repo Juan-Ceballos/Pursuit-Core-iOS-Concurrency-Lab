@@ -13,17 +13,26 @@ class CountryCell: UITableViewCell   {
     @IBOutlet weak var flagImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var capitalLabel: UILabel!
-    @IBOutlet weak var population: UILabel!
+    @IBOutlet weak var populationLabel: UILabel!
     
-    func configureCell(with urlString: String)    {
+    var countries = [Country]()
+    
+    func configureCell(with urlString: String, country: Country)    {
         flagImage.setImage(with: urlString) { result in
             switch result   {
             case .failure:
-                self.flagImage.image = UIImage(systemName: "country.fill")
+                DispatchQueue.main.async {
+                    self.flagImage.image = UIImage(systemName: "country.fill")
+                }
             case .success(let image):
-                self.flagImage.image = image
+                DispatchQueue.main.async {
+                    self.flagImage.image = image
+                }
             }
+
         }
+        self.nameLabel.text = "Country: \(country.name)"
+        self.capitalLabel.text = "Capital: \(country.capital)"
+        self.populationLabel.text = "Population: \(country.population.description)"
     }
-    
 }

@@ -44,6 +44,7 @@ class NetworkHelper {
                 break
             default:
                 completion(.failure(.badStatusCode(urlResponse.statusCode)))
+                return
             }
             completion(.success(data))
         }
