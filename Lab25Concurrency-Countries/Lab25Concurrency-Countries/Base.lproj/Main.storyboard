@@ -98,6 +98,7 @@
                     <navigationItem key="navigationItem" id="v3R-nh-2Dv"/>
                     <connections>
                         <outlet property="countriesTableView" destination="Y8M-Ng-W4V" id="Cig-2j-WKP"/>
+                        <outlet property="countrySearchBar" destination="47K-J9-dxC" id="ag8-Qz-PQE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

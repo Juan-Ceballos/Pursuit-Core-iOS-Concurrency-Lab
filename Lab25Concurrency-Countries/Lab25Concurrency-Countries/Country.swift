@@ -16,4 +16,7 @@ struct Country: Decodable   {
     var flagURL: String {
         return "https://www.countryflags.io/\(alpha2Code)/flat/64.png"
     }
+    var lowercasedName: String {
+        return name.lowercased()
+    }
 }
