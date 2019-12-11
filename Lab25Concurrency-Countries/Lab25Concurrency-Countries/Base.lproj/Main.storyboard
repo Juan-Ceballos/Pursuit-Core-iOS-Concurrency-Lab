@@ -154,6 +154,12 @@
                         <viewLayoutGuide key="safeArea" id="Zvy-hu-bud"/>
                     </view>
                     <navigationItem key="navigationItem" id="t4a-wp-3Iz"/>
+                    <connections>
+                        <outlet property="detailedCapitalLabel" destination="9mz-O9-deB" id="4mz-Dr-gM7"/>
+                        <outlet property="detailedFlagImage" destination="VPT-08-Wca" id="zZH-r0-k8V"/>
+                        <outlet property="detailedNameLabel" destination="5bu-UI-lYd" id="cZy-CN-RST"/>
+                        <outlet property="detailedPopulatiobLabel" destination="OVu-lF-c6F" id="lbH-QG-pMh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R71-yB-0V6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

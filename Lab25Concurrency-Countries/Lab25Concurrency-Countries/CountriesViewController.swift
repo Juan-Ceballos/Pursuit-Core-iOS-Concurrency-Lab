@@ -53,6 +53,16 @@ class CountriesViewController: UIViewController {
             }
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let detailedCountriesViewController = segue.destination as? DetailedCountriesViewController, let indexPath = countriesTableView.indexPathForSelectedRow
+            else    {
+                fatalError()
+        }
+        
+        let country = countries[indexPath.row]
+        detailedCountriesViewController.countries = country
+    }
 }
 
 extension CountriesViewController: UITableViewDataSource    {
